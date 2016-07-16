@@ -1,0 +1,126 @@
+#extension-window body {
+	box-sizing: border-box;
+	font: 12px/15px "Roboto", sans-serif;
+	margin: 0;
+}
+
+#extension-window #wrapper {
+	margin: 0 auto;
+	padding: 15px;
+}
+
+/*
+	Popup page
+*/
+
+#extension-window.popup #wrapper {
+	color: #616f85;
+	width: 340px;
+}
+
+#extension-window.popup input[type="text"] {
+	box-sizing: border-box;
+	width: 100%;
+}
+
+/*
+	Form elements
+*/
+
+#extension-window label {
+	display: block;
+}
+#extension-window input {
+	color: #222;
+}
+#extension-window input,
+#extension-window input:hover {
+	background: #fff !important;
+	border: 1px solid #ddd !important;
+	border-radius: 3px;
+	border-width: 1px 1px 0 1px !important;
+	box-shadow: 0 2px 0 #ccc, 0 -1px #fff inset !important;
+	box-sizing: border-box;
+	font: 12px/15px "Segoe UI", Tahoma, sans-serif;
+	outline: none;
+	padding: 0 0 0 3px;
+	height: 21px;
+	min-height: 21px;
+	width: 100%;
+}
+#extension-window input[type=text],
+#extension-window input[type=password] {
+	padding-right: 3px;
+}
+#extension-window input[disabled] {
+	cursor: default;
+	opacity: .5;
+}
+#extension-window.popup .row {
+	margin: 0 0 10px;
+}
+#extension-window .buttons {
+	overflow: hidden;
+	padding: 33px 0 0;
+	width: 100%;
+}
+#extension-window .buttons .button {
+	float: right;
+	font-weight: 400;
+	padding: 10px 30px;
+}
+#extension-window .button {
+	background: rgba(0, 0, 0, 0.5);
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-shadow: none;
+	color: #fff;
+	cursor: pointer;
+	display: inline-block;
+	font-size: 12px;
+	margin: 0;
+	padding: 5px 10px;
+	outline: none;
+	text-decoration: none;
+	text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.75);
+	transition: all .25s ease-in-out;
+	height: auto;
+	width: auto;
+}
+#extension-window .button:hover,
+#extension-window .button:focus {
+	background: rgba(150, 150, 150, 0.75);
+	border-color: #fff;
+	box-shadow: none;
+}
+#extension-window .button[disabled] {
+	border: 1px solid #eee;
+	opacity: .5;
+}
+
+/*
+	Message widget
+*/
+
+#urlsaver-widget-message {
+	font: 12px Arial, sans-serif;
+	position: fixed;
+	top: -500px;
+	left: 0;
+	text-align: center;
+	width: 100%;
+	z-index: 100000;
+
+	-webkit-transition: all 1s ease-in-out;
+}
+#urlsaver-widget-message .urlsaver-widget-message-text {
+	background: rgba(0, 0, 0, 0.65);
+	color: #fff;
+	display: inline-block;
+	padding: 5px;
+
+	-webkit-border-radius: 5px;
+}
+#urlsaver-widget-message .urlsaver-widget-message-text strong {
+	font-weight: bold;
+}
