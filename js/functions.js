@@ -1,7 +1,7 @@
 /*Default options values*/
 $appDefaults = {
-	formId: '1u4UAsDIYnPCSIaXe7KM2JyaLDk7aouI3dKHUWTOp3Ow',
-	fieldId: 'entry.77256004'
+	formId: 'e/1FAIpQLSfJPHXBPNWzfXtNKMMAHLPeulScU0MbEwzCEdo_HNZDTr6zsQ',	/*https://docs.google.com/forms/d/{formId}/formResponse?embedded=true*/
+	fieldId: 'entry.2082948265'
 };
 
 /* Zepto v1.1.6 - zepto event ajax form ie - zeptojs.com/license */
