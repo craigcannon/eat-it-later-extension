@@ -27,7 +27,7 @@
 				key: this.data.formId,
 				data: value
 			}, function(response) {
-				window.extensionMessage.show('Url has been saved.');
+				window.extensionMessage.show(response.status == 'success' ? 'Url has been saved.' : 'Something was wrong:(');
 			});
 
 			window.extensionMessage.show('Saving url..');
