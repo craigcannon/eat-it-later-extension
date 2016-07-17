@@ -37,7 +37,6 @@
 					data: value
 				}, function(response) {
 					window.extensionMessage.show(response.status == 'success' ? 'Url has been saved.' : 'Something was wrong:(');
-					console.log(response)
 				});
 
 				window.extensionMessage.show('Saving url..');
