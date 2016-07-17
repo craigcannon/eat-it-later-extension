@@ -1,5 +1,17 @@
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	switch(request.type) {
+		case 'readAllProps':
+			var archive = {}, keys = Object.keys(localStorage), i = 0, key;
+
+			for (; key = keys[i]; i++) archive[key] = localStorage.getItem(key);
+
+			sendResponse(archive);
+		break;
+
+		case 'readProperty': return sendResponse(readProperty(request.property, request.default)); break;
+
+		case 'saveProperty': return sendResponse(localStorage[request.property] = request.value); break;
+		
 		case 'getActiveTabInfo':
 			chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
 				if(tabs[0]) sendResponse(request.property ? tabs[0][!tabs[0].hasOwnProperty(request.property) ? 'url' : request.property] : tabs[0]);

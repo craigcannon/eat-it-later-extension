@@ -42,6 +42,13 @@
 		"default_popup": "popup.html"
 	},
 
+	"options_page": "options.html",
+
+	"options_ui": {
+		"page": "options.html",
+		"chrome_style": true
+	},
+
 	"web_accessible_resources": [
 		"/*"
 	]

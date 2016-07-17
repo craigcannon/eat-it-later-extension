@@ -19,18 +19,31 @@
 	Extension.prototype = {
 		constructor: Extension,
 		save: function(data) {
-			var value = {};
+			var value = {}, domains = this.data.domains.replace(/\s+/g, '').split(','), allowed = true;
 			value[this.data.fieldId] = data.url;
 
-			chrome.extension.sendMessage({
-				type: 'addToSheet',
-				key: this.data.formId,
-				data: value
-			}, function(response) {
-				window.extensionMessage.show(response.status == 'success' ? 'Url has been saved.' : 'Something was wrong:(');
+			domains.forEach(function(domain) {
+				/*Test if string is domain*/
+				if((/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/i).test(domain)) {
+					/*Test string is in current url*/
+					if(document.URL.indexOf(domain) < 0) allowed = false;
+				}
 			});
 
-			window.extensionMessage.show('Saving url..');
+			if(allowed) {
+				chrome.extension.sendMessage({
+					type: 'addToSheet',
+					key: this.data.formId,
+					data: value
+				}, function(response) {
+					window.extensionMessage.show(response.status == 'success' ? 'Url has been saved.' : 'Something was wrong:(');
+					console.log(response)
+				});
+
+				window.extensionMessage.show('Saving url..');
+			} else {
+				window.extensionMessage.show('Allowed only "'+(domains.join(', '))+'".');
+			}
 		}
 	}
 
@@ -65,8 +78,14 @@
 	}
 
 	$(function() {
-		window.extensionMessage = new Message();
-		window.extension = new Extension();
+		chrome.runtime.sendMessage({
+			type: 'readProperty',
+			property: 'app_settings',
+			default: {}
+		}, function(settings) {
+			window.extensionMessage = new Message();
+			window.extension = new Extension(JSON.parse(typeof settings === 'string' ? settings : null));
+		});
 	});
 })(Zepto);
 

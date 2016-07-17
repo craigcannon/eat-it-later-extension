@@ -1,5 +1,7 @@
 $(function() {
-	var tmp,
+	var settings = localStorage.getItem('app_settings'),
+		data = $.extend($appDefaults, JSON.parse(typeof settings === 'string' ? settings : null)),
+		tmp,
 		url = $('#url'),
 		save = $('#save');
 

@@ -1,3 +1,15 @@
+html#extension-window.settings,
+#extension-window.settings body {
+	display: table;
+	height: 100%;
+	width: 100%;
+}
+
+#extension-window.settings body {
+	display: table-cell;
+	vertical-align: middle;
+}
+
 #extension-window body {
 	box-sizing: border-box;
 	font: 12px/15px "Roboto", sans-serif;
@@ -22,6 +34,43 @@
 	box-sizing: border-box;
 	width: 100%;
 }
+
+/*
+	Options page
+*/
+
+#extension-window.settings #wrapper {
+	width: 520px;
+}
+
+	#extension-window table {
+		width: 100%;
+	}
+
+		#extension-window th {
+			height: 35px;
+		}
+
+			#extension-window td {
+				padding: 0 0 10px;
+			}
+
+				#extension-window td label {
+					display: inline-block;
+					padding: 0 0 5px;
+				}
+
+				#extension-window td p {
+					margin: 10px 0 0;
+					font-style: 12px;
+					line-height: 18px;
+				}
+			
+		#extension-window.settings .buttons {
+			overflow: hidden;
+			padding: 30px 0 0;
+			width: 100%;
+		}
 
 /*
 	Form elements
@@ -64,10 +113,14 @@
 	padding: 33px 0 0;
 	width: 100%;
 }
-#extension-window .buttons .button {
+#extension-window .buttons .button,
+#extension-window .buttons label {
 	float: right;
 	font-weight: 400;
 	padding: 10px 30px;
+}
+#extension-window .buttons label {
+	font-weight: bold;
 }
 #extension-window .button {
 	background: rgba(0, 0, 0, 0.5);
@@ -96,6 +149,13 @@
 #extension-window .button[disabled] {
 	border: 1px solid #eee;
 	opacity: .5;
+}
+
+#extension-window .success {
+	color: #2f960e;
+}
+#extension-window .error {
+	color: #c5060b;
 }
 
 /*
