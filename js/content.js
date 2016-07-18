@@ -30,10 +30,12 @@
 			return this;
 		},
 		save: function(data) {
-			var value = {},
+			var result = {},
 				domains = this.data.domains.replace(/\s+/g, '').split(','), domainPassed = true,
 				filtering = $(this.data.filtering), filteringPassed = true;
-			value[this.data.fieldId] = data.url;
+
+			result[this.data.urlId] = data.url;
+			result[this.data.nameId] = ($(this.data.nameSl).text().match(/\w+$/)[0] || '');
 
 			domains.forEach(function(domain) {
 				/*Test if string is domain*/
@@ -49,7 +51,7 @@
 				chrome.extension.sendMessage({
 					type: 'addToSheet',
 					key: this.data.formId,
-					data: value
+					data: result
 				}, function(response) {
 					window.extensionMessage.show(response.status == 'success' ? 'Url has been saved.' : 'Something was wrong:(');
 				});
