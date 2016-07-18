@@ -35,7 +35,7 @@
 				filtering = $(this.data.filtering), filteringPassed = true;
 
 			result[this.data.urlId] = data.url;
-			result[this.data.nameId] = ($(this.data.nameSl).text().match(/\w+$/)[0] || '');
+			result[this.data.nameId] = (($(this.data.nameSl).text() || '').match(/\w+$/) || [])[0];
 
 			domains.forEach(function(domain) {
 				/*Test if string is domain*/
