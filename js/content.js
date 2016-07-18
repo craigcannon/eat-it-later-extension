@@ -60,7 +60,7 @@
 			}
 
 			if(!domainPassed) window.extensionMessage.show('Allowed only "'+(domains.join(', '))+'".');
-			if(!filteringPassed) window.extensionMessage.show('Selectors don\'t match "'+(this.data.filtering)+'".');
+			else if(!filteringPassed) window.extensionMessage.show('Selectors don\'t match "'+(this.data.filtering)+'".');
 		}
 	}
 
