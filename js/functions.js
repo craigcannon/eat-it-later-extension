@@ -2,7 +2,7 @@
 $appDefaults = {
 	formId: 'e/1FAIpQLSfJPHXBPNWzfXtNKMMAHLPeulScU0MbEwzCEdo_HNZDTr6zsQ',	/*https://docs.google.com/forms/d/{formId}/formResponse?embedded=true*/
 	urlId: 'entry.2082948265',
-	nameId: 'entry.2024578645',
+	nameId: 'entry.1184234834',
 	nameSl: '#nav-link-yourAccount .nav-line-3',
 	domains: 'amazon.com',
 	filtering: 'a[href*="nav_youraccount_btn"]'
