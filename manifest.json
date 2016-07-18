@@ -38,8 +38,7 @@
 
 	"browser_action": {
 		"default_title": "Extension",
-		"default_icon": "icons/favicon.png",
-		"default_popup": "popup.html"
+		"default_icon": "icons/favicon.png"
 	},
 
 	"options_page": "options.html",

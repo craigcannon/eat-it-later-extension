@@ -11,26 +11,41 @@
 	*/
 
 	function Extension(data) {
-		var $this = this;
-
-		this.data = $.extend($appDefaults, data);
+		return this.load(data);
 	}
 
 	Extension.prototype = {
 		constructor: Extension,
+		load: function(data) {
+			var $this = this;
+
+			chrome.runtime.sendMessage({
+				type: 'readProperty',
+				property: 'app_settings',
+				default: {}
+			}, function(settings) {
+				$this.data = $.extend($appDefaults, JSON.parse(typeof settings === 'string' ? settings : null));
+			});
+
+			return this;
+		},
 		save: function(data) {
-			var value = {}, domains = this.data.domains.replace(/\s+/g, '').split(','), allowed = true;
+			var value = {},
+				domains = this.data.domains.replace(/\s+/g, '').split(','), domainPassed = true,
+				filtering = $(this.data.filtering), filteringPassed = true;
 			value[this.data.fieldId] = data.url;
 
 			domains.forEach(function(domain) {
 				/*Test if string is domain*/
 				if((/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/i).test(domain)) {
 					/*Test string is in current url*/
-					if(document.URL.indexOf(domain) < 0) allowed = false;
+					if(document.URL.indexOf(domain) < 0) domainPassed = false;
 				}
 			});
 
-			if(allowed) {
+			if(this.data.filtering && !filtering.length) filteringPassed = false;
+
+			if(domainPassed && filteringPassed) {
 				chrome.extension.sendMessage({
 					type: 'addToSheet',
 					key: this.data.formId,
@@ -40,9 +55,10 @@
 				});
 
 				window.extensionMessage.show('Saving url..');
-			} else {
-				window.extensionMessage.show('Allowed only "'+(domains.join(', '))+'".');
 			}
+
+			if(!domainPassed) window.extensionMessage.show('Allowed only "'+(domains.join(', '))+'".');
+			if(!filteringPassed) window.extensionMessage.show('Selectors don\'t match "'+(this.data.filtering)+'".');
 		}
 	}
 
@@ -77,14 +93,8 @@
 	}
 
 	$(function() {
-		chrome.runtime.sendMessage({
-			type: 'readProperty',
-			property: 'app_settings',
-			default: {}
-		}, function(settings) {
-			window.extensionMessage = new Message();
-			window.extension = new Extension(JSON.parse(typeof settings === 'string' ? settings : null));
-		});
+		window.extensionMessage = new Message();
+		window.extension = new Extension();
 	});
 })(Zepto);
 

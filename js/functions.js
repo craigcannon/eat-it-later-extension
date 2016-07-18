@@ -2,7 +2,8 @@
 $appDefaults = {
 	formId: 'e/1FAIpQLSfJPHXBPNWzfXtNKMMAHLPeulScU0MbEwzCEdo_HNZDTr6zsQ',	/*https://docs.google.com/forms/d/{formId}/formResponse?embedded=true*/
 	fieldId: 'entry.2082948265',
-	domains: ''
+	domains: 'amazon.com',
+	filtering: 'a[href*="nav_youraccount_btn"]'
 };
 
 /* Zepto v1.1.6 - zepto event ajax form ie - zeptojs.com/license */

@@ -7,6 +7,7 @@ $(function() {
 
 	if(data) {
 		$.each(options, function(n, opt) {
+			console.log(opt, data)
 			switch(opt.type) {
 				case 'checkbox': opt.checked = (data[opt.name] || opt.checked);
 				default: opt.value = (data[opt.name] || opt.value);
@@ -16,6 +17,10 @@ $(function() {
 
 	form.on('submit', function() {
 		save(form.serializeObject(), function() {
+			chrome.extension.sendMessage({
+				type: 'sendTabMsg',
+				action: 'load'
+			});
 			done.show();
 		});
 

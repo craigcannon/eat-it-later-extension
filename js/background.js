@@ -18,16 +18,18 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 			});
 		break;
 
-		case 'sendActiveTabMsg':
+		case 'sendTabMsg':
 			request.type = request.action;
 			delete request.action;
 
-			chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-				if(tabs[0] && tabs[0].url.indexOf('chrome://') < 0) {
-					chrome.tabs.sendMessage(tabs[0].id, request, function(response) {
-						sendResponse(response);
-					});
-				}
+			chrome.tabs.query({}, function(tabs) {
+				tabs.forEach(function(tab) {
+					if(tab && tab.url.indexOf('chrome://') < 0) {
+						chrome.tabs.sendMessage(tab.id, request, function(response) {
+							sendResponse(request);
+						});
+					}
+				});
 
 				return true;
 			});
@@ -70,4 +72,9 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	}
 
 	return true;
+});
+
+/*Add icon click event*/
+chrome.browserAction.onClicked.addListener(function( tab ) {
+	chrome.tabs.sendMessage(tab.id, {type: 'save', url: tab.url});
 });
