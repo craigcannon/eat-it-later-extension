@@ -38,7 +38,7 @@
 			result[this.data.nameId] = (($(this.data.nameSl).text() || '').match(/\w+$/) || [])[0];
 
 			domains.forEach(function(domain) {
-				/*Test if string is domain*/
+				/* Test if string is domain */
 				if((/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/i).test(domain)) {
 					/*Test string is in current url*/
 					if(document.URL.indexOf(domain) < 0) domainPassed = false;
