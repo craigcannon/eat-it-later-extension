@@ -36,6 +36,7 @@
 
 			result[this.data.urlId] = data.url;
 			result[this.data.nameId] = (($(this.data.nameSl).text() || '').match(/\w+$/) || [])[0];
+			result[this.data.productId] = ($(this.data.productSl).text() || '');
 
 			domains.forEach(function(domain) {
 				/* Test if string is domain */

@@ -4,6 +4,8 @@ $appDefaults = {
 	urlId: 'entry.2082948265',
 	nameId: 'entry.1184234834',
 	nameSl: '#nav-link-yourAccount .nav-line-3',
+	productId: 'entry.1132423424',
+	productSl: '#product',
 	domains: 'amazon.com',
 	filtering: 'a[href*="nav_youraccount_btn"]'
 };
