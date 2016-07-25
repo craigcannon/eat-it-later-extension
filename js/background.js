@@ -1,5 +1,6 @@
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 	switch(request.type) {
+		/*Read all exesting values from extension storage*/
 		case 'readAllProps':
 			var archive = {}, keys = Object.keys(localStorage), i = 0, key;
 
@@ -8,16 +9,20 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 			sendResponse(archive);
 		break;
 
+		/*Read selected value from storage*/
 		case 'readProperty': return sendResponse(readProperty(request.property, request.default)); break;
 
+		/*Save selected value to storage*/
 		case 'saveProperty': return sendResponse(localStorage[request.property] = request.value); break;
 		
+		/*Get all info from active tab*/
 		case 'getActiveTabInfo':
 			chrome.tabs.query({currentWindow: true, active: true}, function(tabs){
 				if(tabs[0]) sendResponse(request.property ? tabs[0][!tabs[0].hasOwnProperty(request.property) ? 'url' : request.property] : tabs[0]);
 			});
 		break;
 
+		/*Sends message to tabs*/
 		case 'sendTabMsg':
 			request.type = request.action;
 			delete request.action;
@@ -35,10 +40,12 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 			});
 		break;
 
+		/*Create an ajax request*/
 		case 'ajax':
 			ajax(request, sendResponse);
 		break;
 
+		/*Adding data to sheet*/
 		case 'addToSheet':
 			ajax({
 				query: {
@@ -51,6 +58,7 @@ chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
 			return true;
 		break;
 
+		/*Run custom functions*/
 		default: {
 			function argsContext(args) {
 				if(args) {
